@@ -145,6 +145,7 @@
     topo.classList.remove('visivel'); baixo.classList.remove('visivel');
     topo.textContent = 'Embaralhando as cartas…';
     $('#nome-amiga').textContent = '';
+    palco.prepend($('#neve')); // a neve passa a cair no fundo das cartas
     palco.hidden = false;
     const w = baralho.offsetWidth;
 
@@ -251,6 +252,7 @@
 
   $('#btn-fechar').addEventListener('click', () => {
     palco.hidden = true;
+    document.body.insertBefore($('#neve'), document.querySelector('.moldura'));
     $('#baralho').innerHTML = '';
     btnSortear.focus();
   });

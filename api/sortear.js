@@ -33,9 +33,10 @@ function lerGabarito() {
     const amiga = porNome.get(m[2]);
     if (quem && amiga) pares[quem.id] = amiga.id;
   }
-  // Só vale se estiver completo: todas tiram alguém, todas são tiradas, ninguém tira a si mesma.
+  // Só vale se estiver completo: todas tiram alguém, todas são tiradas, ninguém tira a si mesma
+  // e ninguém tira quem a tirou.
   const tiradas = new Set(Object.values(pares));
-  const valido = PARTICIPANTES.every((p) => pares[p.id] && pares[p.id] !== p.id && tiradas.has(p.id));
+  const valido = PARTICIPANTES.every((p) => pares[p.id] && pares[p.id] !== p.id && tiradas.has(p.id) && pares[pares[p.id]] !== p.id);
   return valido ? pares : null;
 }
 

@@ -25,15 +25,17 @@ const embaralhar = (lista) => {
 };
 
 // As participantes sorteiam em ordem aleatória. Cada uma tira, ao acaso, alguém
-// que ainda não foi tirada e que não seja ela mesma. Se a última ficar sem opção
-// (só sobrou ela mesma), o sorteio inteiro é refeito.
+// que ainda não foi tirada, que não seja ela mesma e que não a tenha tirado
+// (se Shayra tirou Cynthia, Cynthia não pode tirar Shayra). Se alguém ficar sem
+// opção, o sorteio inteiro é refeito.
 function sortear() {
   for (;;) {
     const ordem = embaralhar(NOMES);
     let restantes = [...NOMES];
     const pares = [];
     for (const quem of ordem) {
-      const opcoes = restantes.filter((nome) => nome !== quem);
+      const tirouEla = pares.find(([, amiga]) => amiga === quem);
+      const opcoes = restantes.filter((nome) => nome !== quem && !(tirouEla && nome === tirouEla[0]));
       if (!opcoes.length) break;
       const amiga = opcoes[crypto.randomInt(opcoes.length)];
       restantes = restantes.filter((nome) => nome !== amiga);

@@ -13,7 +13,6 @@
   --cursiva: 'Great Vibes', 'Dancing Script', 'Segoe Script', cursive;
   --manuscrita: 'Dancing Script', 'Segoe Script', cursive;
   --serifa: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --texto: 'Rawline', 'Raleway', 'Segoe UI', system-ui, sans-serif;
   --botao: 'DynaPuff', 'Trebuchet MS', system-ui, sans-serif;
   --cw: min(270px, 60vw, 34vh);
   --grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .38 0 0 0 0 .26 0 0 0 .2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -130,11 +129,10 @@ h1 .linha.maior { font-size: clamp(46px, min(13.6vw, 12.5vh), 124px); margin-top
 
 .chamada {
   margin: clamp(2px, .8vh, 10px) 0 0;
-  font-family: var(--texto);
-  font-size: clamp(16px, min(4.6vw, 3.3vh), 27px);
+  font-size: clamp(20px, min(5.4vw, 4.2vh), 38px);
   font-weight: 500;
-  letter-spacing: .02em;
   color: var(--vinho);
+  letter-spacing: .02em;
 }
 
 /* ---------- Botões ---------- */
@@ -255,9 +253,9 @@ h1 .linha.maior { font-size: clamp(46px, min(13.6vw, 12.5vh), 124px); margin-top
 }
 .previa:not(.vazia) span { display: none; }
 
-.rotulo { display: block; margin-bottom: 6px; font-size: 15px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--azul-escuro); }
+.rotulo { display: block; margin: 6px 0 10px; font-size: 15px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--azul-escuro); }
 
-.seletor { position: relative; }
+.seletor { position: relative; width: min(100%, 300px); margin: 0 auto; }
 .seletor::after {
   content: '';
   position: absolute;
@@ -285,11 +283,12 @@ select {
 }
 select:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
 
-.erro { min-height: 1.2em; margin: 10px 0 0; color: var(--vinho); font-weight: 700; font-size: 17px; }
-.pergunta { margin: 0 0 8px; font-family: var(--texto); font-size: 20px; font-weight: 600; color: var(--tinta); }
-.pergunta strong { color: var(--vinho); text-transform: uppercase; }
-.aviso { margin: 0; font-family: var(--texto); font-size: 15px; line-height: 1.45; }
-.acoes { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+.erro:empty { display: none; }
+.erro { margin: 12px 0 0; color: var(--vinho); font-weight: 700; font-size: 17px; }
+.pergunta { margin: 0 0 6px; font-size: 24px; font-weight: 600; color: var(--tinta); }
+.pergunta strong { color: var(--vinho); text-transform: uppercase; letter-spacing: .04em; }
+.aviso { margin: 0; font-size: 18px; font-style: italic; line-height: 1.3; }
+.acoes { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
 
 /* ---------- Palco das cartas ---------- */
 .palco {
@@ -299,9 +298,6 @@ select:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
   overflow: hidden;
   color: var(--tinta);
   background:
-    radial-gradient(circle, #fff 0 3px, transparent 4px) 12px 20px / 130px 150px,
-    radial-gradient(circle, #fff 0 5px, transparent 6px) 70px 90px / 170px 190px,
-    radial-gradient(circle, rgba(255, 255, 255, .8) 0 2px, transparent 3px) 40px 60px / 90px 110px,
     var(--grao),
     #aebcc7;
   -webkit-backdrop-filter: none;
@@ -320,7 +316,9 @@ select:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
 }
 .texto-topo.visivel { opacity: 1; }
 
-.baralho { position: relative; width: var(--cw); height: calc(var(--cw) * 1.45); flex: none; }
+.palco > :not(canvas) { position: relative; z-index: 1; }
+.palco #neve { z-index: 0; }
+.baralho { width: var(--cw); height: calc(var(--cw) * 1.45); flex: none; }
 .carta { position: absolute; inset: 0; perspective: 1200px; will-change: transform; }
 .carta-miolo { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 1.1s cubic-bezier(.35, .1, .2, 1); }
 .carta.virada .carta-miolo { transform: rotateY(180deg); }
@@ -359,7 +357,7 @@ select:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
   color: var(--vinho);
   text-shadow: 0 2px 0 #fff8ec, 0 0 18px rgba(255, 248, 236, .9);
 }
-.segredo { margin: 8px 0 16px; font-family: var(--texto); font-weight: 500; font-size: clamp(16px, min(4.6vw, 3vh), 22px); }
+.segredo { margin: 4px 0 14px; font-family: var(--manuscrita); font-weight: 600; font-size: clamp(22px, min(6.4vw, 4vh), 32px); }
 
 .brilho { position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; border-radius: 50%; pointer-events: none; }
 
