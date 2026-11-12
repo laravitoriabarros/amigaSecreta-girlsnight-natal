@@ -12,6 +12,7 @@
   --marrom: #5a4640;
   --cursiva: 'Great Vibes', 'Dancing Script', 'Segoe Script', cursive;
   --manuscrita: 'Dancing Script', 'Segoe Script', cursive;
+  --serifa: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --texto: 'Rawline', 'Raleway', 'Segoe UI', system-ui, sans-serif;
   --botao: 'DynaPuff', 'Trebuchet MS', system-ui, sans-serif;
   --cw: min(270px, 60vw, 34vh);
@@ -26,7 +27,7 @@ html, body { margin: 0; min-height: 100%; }
 body {
   min-height: 100vh;
   min-height: 100dvh;
-  font-family: var(--texto);
+  font-family: var(--serifa);
   color: var(--marrom);
   background:
     radial-gradient(ellipse at 20% 0%, rgba(246, 211, 189, .35), transparent 55%),
@@ -254,7 +255,7 @@ h1 .linha.maior { font-size: clamp(46px, min(13.6vw, 12.5vh), 124px); margin-top
 }
 .previa:not(.vazia) span { display: none; }
 
-.rotulo { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--azul-escuro); }
+.rotulo { display: block; margin-bottom: 6px; font-size: 15px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--azul-escuro); }
 
 .seletor { position: relative; }
 .seletor::after {
@@ -272,8 +273,8 @@ select {
   min-height: 52px;
   -webkit-appearance: none;
   appearance: none;
-  font-family: var(--texto);
-  font-size: 18px;
+  font-family: var(--serifa);
+  font-size: 22px;
   font-weight: 600;
   color: var(--tinta);
   padding: 10px 46px 10px 20px;
@@ -284,10 +285,10 @@ select {
 }
 select:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
 
-.erro { min-height: 1.2em; margin: 10px 0 0; color: var(--vinho); font-weight: 600; font-size: 15px; }
-.pergunta { margin: 0 0 8px; font-size: 20px; font-weight: 600; color: var(--tinta); }
+.erro { min-height: 1.2em; margin: 10px 0 0; color: var(--vinho); font-weight: 700; font-size: 17px; }
+.pergunta { margin: 0 0 8px; font-family: var(--texto); font-size: 20px; font-weight: 600; color: var(--tinta); }
 .pergunta strong { color: var(--vinho); text-transform: uppercase; }
-.aviso { margin: 0; font-size: 15px; line-height: 1.45; }
+.aviso { margin: 0; font-family: var(--texto); font-size: 15px; line-height: 1.45; }
 .acoes { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
 
 /* ---------- Palco das cartas ---------- */
@@ -350,15 +351,15 @@ select:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
 .texto-baixo.visivel { opacity: 1; transform: none; pointer-events: auto; }
 .nome-amiga {
   margin: 0;
-  font-family: var(--texto);
+  font-family: var(--serifa);
   font-weight: 700;
-  font-size: clamp(36px, min(11.5vw, 7.6vh), 70px);
-  letter-spacing: .04em;
+  font-size: clamp(40px, min(13vw, 8.5vh), 78px);
+  letter-spacing: .06em;
   line-height: 1;
   color: var(--vinho);
   text-shadow: 0 2px 0 #fff8ec, 0 0 18px rgba(255, 248, 236, .9);
 }
-.segredo { margin: 8px 0 16px; font-weight: 500; font-size: clamp(16px, min(4.6vw, 3vh), 22px); }
+.segredo { margin: 8px 0 16px; font-family: var(--texto); font-weight: 500; font-size: clamp(16px, min(4.6vw, 3vh), 22px); }
 
 .brilho { position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; border-radius: 50%; pointer-events: none; }
 
