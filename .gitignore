@@ -1,0 +1,15 @@
+# Resultado do sorteio: nunca vai para o repositório (ele é público).
+# Na Vercel, o conteúdo vai na variável de ambiente GABARITO.
+gabarito.txt
+
+# Arquivos do Claude
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.mcp.json
+
+# Vercel e Node
+.vercel/
+node_modules/
+.env
+.env.*

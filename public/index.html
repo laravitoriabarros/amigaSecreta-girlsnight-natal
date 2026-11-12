@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fbf1e1">
+  <title>Amiga Secreta | Girls Night de Natal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Cormorant+Garamond:wght@500;600;700&family=Dancing+Script:wght@600;700&family=DynaPuff:wght@500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Feira de Natal em aquarela (desenhada por cena.js) -->
+  <div class="cena" aria-hidden="true">
+    <svg id="cena-fundo" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMax slice"></svg>
+    <svg id="cena-trem" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMax slice"></svg>
+    <svg id="cena-chao" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMax slice"></svg>
+    <svg id="cena-gente" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMax slice"></svg>
+    <svg id="cena-frente" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMax slice"></svg>
+    <svg id="cena-vida" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMax slice"></svg>
+  </div>
+  <canvas id="neve" aria-hidden="true"></canvas>
+  <div class="moldura" aria-hidden="true"></div>
+  <svg class="ramo ramo-esq" viewBox="0 0 300 250" aria-hidden="true"></svg>
+  <svg class="ramo ramo-dir" viewBox="0 0 300 250" aria-hidden="true"></svg>
+  <div class="estrelas" aria-hidden="true"></div>
+
+  <main class="inicio">
+    <svg class="divisor" viewBox="0 0 260 30" aria-hidden="true">
+      <path d="M12 15 H104 M156 15 H248" stroke="#c9973f" stroke-width="1.4"/>
+      <path d="M104 15 l5 -4 l5 4 l-5 4z M146 15 l5 -4 l5 4 l-5 4z" fill="#c9973f"/>
+      <path d="M130 1 Q132 13 144 15 Q132 17 130 29 Q128 17 116 15 Q128 13 130 1Z" fill="#c9973f"/>
+    </svg>
+    <h1>
+      <span class="linha">Girls Night de Natal</span>
+      <svg class="azevinho" viewBox="0 0 320 44" aria-hidden="true">
+        <path d="M14 26 Q70 8 124 22 M306 26 Q250 8 196 22" fill="none" stroke="#a3182a" stroke-width="1.5" stroke-linecap="round"/>
+        <g fill="#5d7a56">
+          <path transform="translate(160 22) rotate(196)" d="M0 0 Q7 -10 14 -5 Q19 -12 26 -5 Q33 -9 38 0 Q33 9 26 5 Q19 12 14 5 Q7 10 0 0Z"/>
+          <path transform="translate(160 22) rotate(-16)" d="M0 0 Q7 -10 14 -5 Q19 -12 26 -5 Q33 -9 38 0 Q33 9 26 5 Q19 12 14 5 Q7 10 0 0Z"/>
+        </g>
+        <circle cx="154" cy="24" r="5.5" fill="#b3202c"/><circle cx="166" cy="24" r="5.5" fill="#b3202c"/><circle cx="160" cy="15" r="5.5" fill="#c4303a"/>
+      </svg>
+      <span class="linha maior">Amiga Secreta</span>
+    </h1>
+    <svg class="divisor curto" viewBox="0 0 160 26" aria-hidden="true">
+      <path d="M8 13 H62 M98 13 H152" stroke="#c9973f" stroke-width="1.4"/>
+      <path d="M80 1 Q81.6 11.4 92 13 Q81.6 14.6 80 25 Q78.4 14.6 68 13 Q78.4 11.4 80 1Z" fill="#c9973f"/>
+    </svg>
+    <p class="chamada">Sorteie sua amiga secreta</p>
+
+    <button id="btn-sortear" class="botao botao-principal" type="button">
+      Clique aqui para sortear
+    </button>
+  </main>
+
+  <!-- Quem é você? -->
+  <div id="modal" class="veu" hidden>
+    <div class="painel" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+      <svg class="floreio" viewBox="0 0 220 34" aria-hidden="true">
+        <path d="M110 30 q-10 -14 -30 -12 q-22 2 -30 -8 q-6 -8 4 -8 q8 0 2 8 M110 30 q10 -14 30 -12 q22 2 30 -8 q6 -8 -4 -8 q-8 0 -2 8 M6 22 H56 M164 22 H214" fill="none" stroke="#6f8597" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="110" cy="12" r="3" fill="#a3182a"/>
+      </svg>
+      <div id="passo-escolha">
+        <h2 id="modal-titulo">Quem é <em>você?</em></h2>
+        <div id="previa" class="previa vazia"><span>?</span></div>
+        <label class="rotulo" for="quem">Escolha o seu nome</label>
+        <div class="seletor">
+          <select id="quem"></select>
+        </div>
+        <p id="erro" class="erro" role="alert"></p>
+        <div class="acoes">
+          <button id="btn-cancelar" class="botao botao-neutro" type="button">Voltar</button>
+          <button id="btn-continuar" class="botao botao-cheio" type="button" disabled>Continuar</button>
+        </div>
+      </div>
+      <div id="passo-confirma" hidden>
+        <h2>Tem <em>certeza?</em></h2>
+        <div id="previa2" class="previa"></div>
+        <p class="pergunta">Você é a <strong id="nome-confirma"></strong>?</p>
+        <p class="aviso">A carta é só sua, não deixe ninguém espiar!</p>
+        <div class="acoes">
+          <button id="btn-nao" class="botao botao-neutro" type="button">Não, voltar</button>
+          <button id="btn-sim" class="botao botao-cheio" type="button">Sim, sou eu!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Embaralho e revelação -->
+  <div id="palco" class="veu palco" hidden>
+    <p id="texto-topo" class="texto-topo" aria-live="polite"></p>
+    <div id="baralho" class="baralho"></div>
+    <div id="texto-baixo" class="texto-baixo">
+      <p id="nome-amiga" class="nome-amiga" aria-live="polite"></p>
+      <p class="segredo">Guarde bem este segredo.</p>
+      <button id="btn-fechar" class="botao botao-cheio" type="button">Segredo guardado!</button>
+    </div>
+  </div>
+
+  <script src="cena.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
