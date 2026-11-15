@@ -100,11 +100,23 @@
     <div id="texto-baixo" class="texto-baixo">
       <p id="nome-amiga" class="nome-amiga" aria-live="polite"></p>
       <p class="segredo">Guarde bem este segredo.</p>
-      <button id="btn-fechar" class="botao botao-cheio" type="button">Segredo guardado!</button>
+      <div class="acoes">
+        <button id="btn-fechar" class="botao botao-neutro" type="button">Segredo guardado!</button>
+        <button id="btn-conhecer" class="botao botao-cheio" type="button">Conheça seu alvo!</button>
+      </div>
     </div>
   </div>
 
+  <!-- Conheça seu alvo: livro sobre a mesa, à luz de velas -->
+  <div id="livro-cena" class="veu mesa" hidden>
+    <div class="vela vela-esq" aria-hidden="true"></div>
+    <div class="vela vela-dir" aria-hidden="true"></div>
+    <div class="livro-palco"><div id="livro" class="livro"></div></div>
+    <button id="btn-fechar-livro" class="botao botao-cheio" type="button">Fechar o livro</button>
+  </div>
+
   <script src="cena.js"></script>
+  <script src="livro.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

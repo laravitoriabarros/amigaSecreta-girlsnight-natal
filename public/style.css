@@ -387,3 +387,192 @@ select:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
   .trem, .andante, .perna, .braco, .balanco, .roda, .fumaca, .luz, .estrelas svg, .botao-principal { animation: none; }
   .andante { transform: translateX(calc(var(--at) * -13px)); }
 }
+
+/* ---------- Conheça seu alvo: livro sobre a mesa, à luz de velas ---------- */
+.texto-baixo .acoes { margin-top: 0; }
+
+.mesa {
+  z-index: 30;
+  flex-direction: column;
+  gap: clamp(10px, 2.4vh, 22px);
+  overflow-x: hidden;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  /* luz da vela, emendas das tábuas, veios e a madeira */
+  background:
+    radial-gradient(ellipse 75% 62% at 50% 46%, rgba(255, 200, 115, .5), rgba(255, 165, 70, .14) 46%, rgba(12, 5, 0, .8) 100%),
+    repeating-linear-gradient(90deg, transparent 0 176px, rgba(28, 12, 4, .6) 176px 179px, rgba(255, 220, 170, .08) 179px 181px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .035) 0 2px, transparent 2px 9px, rgba(0, 0, 0, .06) 9px 11px, transparent 11px 19px),
+    var(--grao),
+    linear-gradient(90deg, #6b4125, #7e502d 22%, #68401f 48%, #7c4e2b 74%, #623a1f);
+}
+.mesa::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 58% 48% at 50% 46%, rgba(255, 214, 140, .34), transparent 72%);
+  mix-blend-mode: screen;
+  animation: tremular 3.4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes tremular {
+  0%, 100% { opacity: .9; transform: scale(1); }
+  22% { opacity: .62; transform: scale(.97); }
+  41% { opacity: 1; transform: scale(1.03); }
+  63% { opacity: .72; transform: scale(.99); }
+  82% { opacity: .95; transform: scale(1.02); }
+}
+
+.vela { position: absolute; width: clamp(48px, 7.5vw, 104px); pointer-events: none; }
+.vela svg { display: block; width: 100%; overflow: visible; filter: drop-shadow(0 10px 8px rgba(0, 0, 0, .45)); }
+.vela-esq { left: clamp(6px, 3.5vw, 60px); bottom: 9vh; }
+.vela-dir { right: clamp(6px, 3.5vw, 60px); top: 9vh; }
+.vela .chama { transform-box: fill-box; transform-origin: 50% 100%; animation: chama 1.1s ease-in-out infinite alternate; }
+.vela-dir .chama { animation-duration: .9s; animation-delay: -.4s; }
+.vela .halo { animation: tremular 2.1s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes chama {
+  0% { transform: scale(1, 1) skewX(0deg); }
+  35% { transform: scale(.94, 1.07) skewX(-3deg); }
+  70% { transform: scale(1.05, .95) skewX(3deg); }
+  100% { transform: scale(.97, 1.04) skewX(-1.5deg); }
+}
+
+.livro-palco { position: relative; z-index: 1; flex: none; }
+.livro {
+  /* largura do livro aberto; todas as medidas internas usam --u (1% dessa largura) */
+  --lw: max(min(92vw, 880px, (100vh - 130px) * 1.42), min(92vw, 560px));
+  --lw: max(min(92vw, 880px, (100dvh - 130px) * 1.42), min(92vw, 560px));
+  --lh: calc(var(--lw) / 1.42);
+  --u: calc(var(--lw) / 100);
+  position: relative;
+  width: var(--lw);
+  height: var(--lh);
+}
+.vertical .livro {
+  --lw: min(90vw, 440px);
+  --lh: min(max(100vh - 150px, 430px), var(--lw) * 1.9);
+  --lh: min(max(100dvh - 150px, 430px), var(--lw) * 1.9);
+}
+
+/* Cada "metade" ocupa o lado direito do livro e gira em torno da lombada */
+.metade { position: absolute; top: 0; bottom: 0; left: 50%; width: 50%; transform-origin: 0 50%; transform-style: preserve-3d; }
+.metade.dura { top: calc(var(--u) * -1.1); bottom: calc(var(--u) * -1.1); width: calc(50% + var(--u) * 1.1); }
+.vertical .metade { top: 50%; bottom: auto; left: 0; width: 100%; height: 50%; transform-origin: 50% 0; }
+.vertical .metade.dura { left: calc(var(--u) * -2.2); width: calc(100% + var(--u) * 4.4); height: calc(50% + var(--u) * 2.2); }
+
+.contracapa { z-index: 1; background: #6e0f1d; border-radius: 0 calc(var(--u) * 1.2) calc(var(--u) * 1.2) 0; box-shadow: 0 calc(var(--u) * 2.5) calc(var(--u) * 5) rgba(0, 0, 0, .55); }
+.vertical .contracapa { border-radius: 0 0 calc(var(--u) * 2.4) calc(var(--u) * 2.4); }
+
+.livro .face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: var(--grao), #fbf2df;
+  border-radius: 0 calc(var(--u) * .6) calc(var(--u) * .6) 0;
+  color: var(--marrom);
+  box-shadow: none;
+}
+.livro .face.lado-b { transform: rotateY(180deg); }
+.vertical .livro .face { border-radius: 0 0 calc(var(--u) * 1.2) calc(var(--u) * 1.2); }
+.vertical .livro .face.lado-b { transform: rotateX(180deg); }
+/* sombra junto da lombada */
+.livro .face::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(70, 35, 10, .3), transparent 13%); }
+.livro .face.lado-b::after { background: linear-gradient(270deg, rgba(70, 35, 10, .3), transparent 13%); }
+.vertical .livro .face::after { background: linear-gradient(180deg, rgba(70, 35, 10, .3), transparent 11%); }
+.vertical .livro .face.lado-b::after { background: linear-gradient(0deg, rgba(70, 35, 10, .3), transparent 11%); }
+
+.livro .pautada {
+  background:
+    repeating-linear-gradient(180deg, transparent 0 calc(var(--u) * 3.6 - 1px), rgba(111, 133, 151, .28) calc(var(--u) * 3.6 - 1px) calc(var(--u) * 3.6)) 0 calc(var(--u) * 6) no-repeat,
+    var(--grao), #fbf2df;
+}
+.vertical .livro .pautada {
+  background:
+    repeating-linear-gradient(180deg, transparent 0 calc(var(--u) * 7 - 1px), rgba(111, 133, 151, .28) calc(var(--u) * 7 - 1px) calc(var(--u) * 7)) 0 calc(var(--u) * 8) no-repeat,
+    var(--grao), #fbf2df;
+}
+
+.capa .face { border-radius: 0 calc(var(--u) * 1.2) calc(var(--u) * 1.2) 0; }
+.vertical .capa .face { border-radius: 0 0 calc(var(--u) * 2.4) calc(var(--u) * 2.4); }
+.capa .lado-a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--u) * 1.6);
+  text-align: center;
+  color: var(--ouro-claro);
+  background:
+    radial-gradient(circle, rgba(246, 213, 138, .35) 0 1px, transparent 1.6px) 0 0 / calc(var(--u) * 2.2) calc(var(--u) * 2.2),
+    var(--grao),
+    linear-gradient(150deg, #a81d2f, #7a1020);
+}
+.capa .lado-a::before { content: ""; position: absolute; inset: calc(var(--u) * 2.2); border: 1.5px solid var(--ouro-claro); border-radius: calc(var(--u) * .6); box-shadow: 0 0 0 calc(var(--u) * .5) rgba(122, 16, 32, .9), 0 0 0 calc(var(--u) * .65) rgba(246, 213, 138, .6); }
+.capa .lado-a span { font-family: var(--cursiva); font-size: calc(var(--u) * 7.4); line-height: .95; text-shadow: 0 2px 3px rgba(0, 0, 0, .4); }
+.capa .lado-a i { font-family: var(--serifa); font-style: normal; font-weight: 600; font-size: calc(var(--u) * 1.9); letter-spacing: .22em; text-transform: uppercase; }
+.capa .lado-b { background: var(--grao), #ead9bd; }
+.vertical .capa .lado-a span { font-size: calc(var(--u) * 13); }
+.vertical .capa .lado-a span br { display: none; }
+.vertical .capa .lado-a i { font-size: calc(var(--u) * 3.6); }
+.vertical .capa .lado-a::before { inset: calc(var(--u) * 4); }
+
+/* Página esquerda: foto e nome */
+.pag-foto { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(var(--u) * 1.2); padding: calc(var(--u) * 3.4); }
+.pag-foto img {
+  height: 74%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border: calc(var(--u) * .7) solid #fffdf8;
+  border-radius: 3px;
+  box-shadow: 0 calc(var(--u) * .6) calc(var(--u) * 1.6) rgba(60, 30, 10, .4);
+  transform: rotate(-2deg);
+}
+.pag-foto p { margin: 0; font-family: var(--cursiva); font-size: calc(var(--u) * 7.2); line-height: 1; color: var(--vinho); }
+.vertical .pag-foto { flex-direction: row; gap: calc(var(--u) * 4); padding: calc(var(--u) * 5); }
+.vertical .pag-foto img { height: 90%; border-width: calc(var(--u) * 1.2); }
+.vertical .pag-foto p { font-size: calc(var(--u) * 12.5); }
+
+/* Página direita: do que ela gosta */
+.pag-lista { padding: calc(var(--u) * 3.6) calc(var(--u) * 3.4) calc(var(--u) * 3) calc(var(--u) * 4.4); display: flex; flex-direction: column; }
+.pag-lista h3 { margin: 0 0 calc(var(--u) * 1.8); font-family: var(--manuscrita); font-weight: 700; font-size: calc(var(--u) * 4.3); line-height: 1.05; color: var(--vinho); text-align: center; }
+.pag-lista ul { flex: 1; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; justify-content: space-evenly; gap: calc(var(--u) * .8); }
+.pag-lista li {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 1.6);
+  font-weight: 600;
+  font-size: calc(var(--u) * 2.45);
+  line-height: 1.12;
+  color: var(--tinta);
+  opacity: 0;
+  transform: translateX(calc(var(--u) * 1.5));
+  transition: opacity .5s ease, transform .5s ease;
+}
+.pag-lista .ic { flex: none; width: calc(var(--u) * 4.8); }
+.pag-lista .ic svg { display: block; width: 100%; filter: drop-shadow(0 1px 1px rgba(60, 30, 10, .3)); }
+.livro.aberto .pag-lista li { opacity: 1; transform: none; }
+.livro.aberto .pag-lista li:nth-child(2) { transition-delay: .12s; }
+.livro.aberto .pag-lista li:nth-child(3) { transition-delay: .24s; }
+.livro.aberto .pag-lista li:nth-child(4) { transition-delay: .36s; }
+.livro.aberto .pag-lista li:nth-child(5) { transition-delay: .48s; }
+.livro.aberto .pag-lista li:nth-child(6) { transition-delay: .6s; }
+.vertical .pag-lista { padding: calc(var(--u) * 6) calc(var(--u) * 5) calc(var(--u) * 4); }
+.vertical .pag-lista h3 { font-size: calc(var(--u) * 7.6); margin-bottom: calc(var(--u) * 2); }
+.vertical .pag-lista li { font-size: calc(var(--u) * 4.5); gap: calc(var(--u) * 3); }
+.vertical .pag-lista .ic { width: calc(var(--u) * 8.4); }
+
+#btn-fechar-livro { position: relative; z-index: 1; flex: none; opacity: 0; pointer-events: none; transition: opacity .5s ease; }
+#btn-fechar-livro.visivel { opacity: 1; pointer-events: auto; }
+
+@media (orientation: portrait) and (max-width: 720px) {
+  .mesa { justify-content: flex-start; padding-top: 74px; }
+  .vela { width: 46px; }
+  .vela-esq { left: 10px; top: 4px; bottom: auto; }
+  .vela-dir { right: 10px; top: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mesa::before, .vela .chama, .vela .halo { animation: none; }
+}
+.pagina-base { z-index: 2; }

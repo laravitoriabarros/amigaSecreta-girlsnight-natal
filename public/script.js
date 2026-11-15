@@ -155,7 +155,9 @@
   const T = (x, y, r, s) => `translate(${x}px, ${y}px) rotate(${r}deg) scale(${s})`;
   const SUAVE = 'cubic-bezier(.4, 0, .2, 1)';
 
+  let amigaAtual = null;
   async function revelar(amiga) {
+    amigaAtual = amiga;
     const baralho = $('#baralho'), topo = $('#texto-topo'), baixo = $('#texto-baixo');
     const N = 7, S = 0.62, meio = (N - 1) / 2;
 
@@ -247,7 +249,7 @@
     brilhos(baralho);
     $('#nome-amiga').textContent = amiga.nome.toUpperCase() + '!';
     baixo.classList.add('visivel');
-    $('#btn-fechar').focus();
+    $('#btn-conhecer').focus();
   }
 
   function brilhos(onde) {
@@ -268,13 +270,17 @@
     }
   }
 
-  $('#btn-fechar').addEventListener('click', () => {
+  $('#btn-conhecer').addEventListener('click', () => {
+    fecharPalco();
+    abrirLivro(amigaAtual, () => btnSortear.focus());
+  });
+  $('#btn-fechar').addEventListener('click', () => { fecharPalco(); btnSortear.focus(); });
+  function fecharPalco() {
     palco.hidden = true;
     document.body.insertBefore($('#neve'), document.querySelector('.moldura'));
     $('#baralho').innerHTML = '';
     carregarEstado();
-    btnSortear.focus();
-  });
+  }
 
   carregarEstado();
 })();
