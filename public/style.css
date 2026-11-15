@@ -20,6 +20,10 @@
 
 * { box-sizing: border-box; }
 
+/* Cursor: seta com laço vermelho (o ponto do clique fica na ponta da seta) */
+html { cursor: url('cursor-laco.svg') 2 2, auto; }
+button, select, a, label[for] { cursor: url('cursor-laco.svg') 2 2, pointer; }
+
 html { -webkit-text-size-adjust: 100%; }
 html, body { margin: 0; min-height: 100%; }
 
@@ -123,8 +127,8 @@ h1 {
   line-height: 1.05;
   text-shadow: 0 1px 0 rgba(255, 255, 255, .7);
 }
-h1 .linha { display: block; font-size: clamp(38px, min(11.4vw, 10.5vh), 104px); padding: 0 .12em; }
-h1 .linha.maior { font-size: clamp(46px, min(13.6vw, 12.5vh), 124px); margin-top: -.08em; }
+h1 .linha { display: block; white-space: nowrap; font-size: clamp(28px, min(11.4vw, 10.5vh), 104px); padding: 0 .12em; }
+h1 .linha.maior { font-size: clamp(34px, min(13.6vw, 12.5vh), 124px); margin-top: -.08em; }
 .azevinho { display: block; width: clamp(170px, 40vw, 320px); margin: -.02em auto 0; }
 
 .chamada {
@@ -148,7 +152,7 @@ h1 .linha.maior { font-size: clamp(46px, min(13.6vw, 12.5vh), 124px); margin-top
   letter-spacing: .05em;
   text-transform: uppercase;
   line-height: 1.1;
-  cursor: pointer;
+  cursor: url('cursor-laco.svg') 2 2, pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   transition: transform .15s ease, background-color .15s ease, box-shadow .15s ease;
@@ -156,7 +160,7 @@ h1 .linha.maior { font-size: clamp(46px, min(13.6vw, 12.5vh), 124px); margin-top
 .botao:hover:not(:disabled) { transform: translateY(-2px); }
 .botao:active:not(:disabled) { transform: translateY(1px) scale(.98); }
 .botao:focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }
-.botao:disabled { cursor: not-allowed; opacity: .55; }
+.botao:disabled { cursor: url('cursor-laco.svg') 2 2, not-allowed; opacity: .55; }
 
 .botao-cheio, .botao-principal { color: #fff8ec; background: var(--vinho); box-shadow: 0 6px 16px rgba(127, 16, 32, .32); }
 .botao-cheio:hover:not(:disabled), .botao-principal:hover:not(:disabled) { background: #b51f33; }
@@ -273,7 +277,7 @@ select {
   border-radius: 999px;
   border: 1.5px solid var(--azul-escuro);
   background: #fffdf8;
-  cursor: pointer;
+  cursor: url('cursor-laco.svg') 2 2, pointer;
 }
 select:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
 
@@ -368,6 +372,15 @@ select:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
   .previa { width: 70px; height: 70px; margin-bottom: 8px; font-size: 34px; }
   .floreio { display: none; }
   .ramo { width: 18vw; }
+  .cena { height: 40vh; height: 40dvh; }
+  .veu { padding: 8px 16px; }
+  .painel h2 { font-size: 30px; margin: 0 0 8px; }
+  .rotulo { margin: 0 0 6px; }
+  select { min-height: 44px; font-size: 19px; }
+  .acoes { margin-top: 14px; }
+  .botao { min-height: 44px; padding: 10px 22px; }
+  .pergunta { font-size: 20px; }
+  .aviso { font-size: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
