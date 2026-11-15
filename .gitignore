@@ -1,5 +1,5 @@
-# Resultado do sorteio: nunca vai para o repositório (ele é público).
-# Na Vercel, o conteúdo vai na variável de ambiente GABARITO.
+# Resultado do sorteio baixado pela organizadora: nunca vai para o repositório (ele é público).
+# Credenciais do banco ficam em .env.local, também fora do repositório.
 gabarito.txt
 
 # Arquivos do Claude

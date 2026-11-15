@@ -1,5 +1,5 @@
 // Amiga Secreta de Natal: neve, modal "Quem é você?" e animação das cartas.
-// Quem tirou quem fica no gabarito.txt, consultado pela função api/sortear.js (Vercel).
+// O sorteio é feito na hora pela função api/sortear.js (Vercel) e fica gravado no banco.
 (function () {
   const $ = (s) => document.querySelector(s);
   const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -49,16 +49,28 @@
   })();
 
   /* ================= Participantes ================= */
-  const btnSortear = $('#btn-sortear');
+  const btnSortear = $('#btn-sortear'), btnTexto = $('#btn-texto'), status = $('#status');
   const modal = $('#modal'), palco = $('#palco'), seletor = $('#quem'), erro = $('#erro');
   const passoEscolha = $('#passo-escolha'), passoConfirma = $('#passo-confirma');
-  const participantes = [
-    { id: 'lara', nome: 'Lara' },
-    { id: 'julia', nome: 'Júlia' },
-    { id: 'shayra', nome: 'Shayra' },
-    { id: 'karol', nome: 'Karol' },
-    { id: 'cynthia', nome: 'Cynthia' },
-  ].map((p) => ({ ...p, foto: `imagens/participantes/${p.id}.jpg` }));
+  let participantes = [];
+
+  // Pergunta ao servidor quem já sorteou. Devolve true se ainda há quem possa sortear.
+  async function carregarEstado() {
+    try {
+      const r = await fetch('api/estado', { cache: 'no-store' });
+      const dados = await r.json().catch(() => ({}));
+      if (!r.ok || !dados.participantes) throw new Error(dados.erro || 'Sem conexão com o sorteio. Tente de novo.');
+      participantes = dados.participantes;
+    } catch (e) {
+      status.textContent = e instanceof TypeError ? 'Sem conexão com o sorteio. Tente de novo.' : e.message;
+      return false;
+    }
+    const todas = participantes.every((p) => p.jaSorteou);
+    btnSortear.disabled = todas;
+    btnTexto.textContent = todas ? 'Todas já sortearam!' : 'Clique aqui para sortear';
+    status.textContent = todas ? 'Sorteio completo. Feliz Natal!' : '';
+    return !todas;
+  }
 
   /* ================= Modal ================= */
   const escolhida = () => participantes.find((p) => p.id === seletor.value);
@@ -70,7 +82,7 @@
 
   function abrirModal() {
     seletor.innerHTML = '<option value="" disabled selected>Selecione…</option>' +
-      participantes.map((p) => `<option value="${p.id}">${p.nome}</option>`).join('');
+      participantes.map((p) => `<option value="${p.id}"${p.jaSorteou ? ' disabled' : ''}>${p.nome}${p.jaSorteou ? ' (já sorteou)' : ''}</option>`).join('');
     erro.textContent = '';
     mostrarPrevia();
     modal.hidden = false;
@@ -87,7 +99,7 @@
     $('#btn-continuar').disabled = !p;
   }
 
-  btnSortear.addEventListener('click', abrirModal);
+  btnSortear.addEventListener('click', async () => { if (await carregarEstado()) abrirModal(); });
   seletor.addEventListener('change', () => { erro.textContent = ''; mostrarPrevia(); });
   $('#btn-cancelar').addEventListener('click', fecharModal);
   modal.addEventListener('click', (e) => { if (e.target === modal) fecharModal(); });
@@ -117,6 +129,12 @@
     } catch (e) {
       mostrarPasso(false);
       erro.textContent = e instanceof TypeError ? 'Sem conexão com o sorteio. Tente de novo.' : e.message;
+      if (await carregarEstado()) {
+        const atual = seletor.value;
+        abrirModal();
+        if (escolhida() && !escolhida().jaSorteou) seletor.value = atual;
+        erro.textContent = e instanceof TypeError ? 'Sem conexão com o sorteio. Tente de novo.' : e.message;
+      } else modal.hidden = true;
       return;
     } finally {
       btn.disabled = false;
@@ -254,7 +272,9 @@
     palco.hidden = true;
     document.body.insertBefore($('#neve'), document.querySelector('.moldura'));
     $('#baralho').innerHTML = '';
+    carregarEstado();
     btnSortear.focus();
   });
 
+  carregarEstado();
 })();
