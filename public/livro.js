@@ -9,7 +9,7 @@
   /* ============ Ícones (desenhos 2D simples) ============ */
   const svg = (corpo) => `<svg viewBox="0 0 32 32" aria-hidden="true">${corpo}</svg>`;
   const livro = (cor, emblema = '') => svg(`<path d="M6 5h17a3 3 0 0 1 3 3v19H9a3 3 0 0 1-3-3z" fill="${cor}"/><path d="M9 23.5h17V27H9a1.75 1.75 0 0 1 0-3.5z" fill="#fff8ec"/><path d="M6 24V8" stroke="#000" stroke-opacity=".18" stroke-width="2"/>${emblema}`);
-  const cores = (a, b) => svg(`<circle cx="12" cy="16" r="9" fill="${a}" stroke="#fff8ec" stroke-width="1.6"/><circle cx="20.5" cy="16" r="9" fill="${b}" stroke="#fff8ec" stroke-width="1.6"/>`);
+  const cores = (a, b) => svg(`<circle cx="12" cy="16" r="9" fill="${a}" stroke="#b9a48c" stroke-width="1.1"/><circle cx="20.5" cy="16" r="9" fill="${b}" stroke="#b9a48c" stroke-width="1.1"/>`);
   const urso = svg('<circle cx="8.5" cy="9" r="4.6" fill="#a9774c"/><circle cx="23.5" cy="9" r="4.6" fill="#a9774c"/><circle cx="8.5" cy="9" r="2" fill="#e7c7a3"/><circle cx="23.5" cy="9" r="2" fill="#e7c7a3"/><circle cx="16" cy="17.5" r="10.5" fill="#b98a5e"/><ellipse cx="16" cy="21" rx="4.6" ry="3.6" fill="#f0dcc0"/><circle cx="12" cy="15.5" r="1.4" fill="#3a2a28"/><circle cx="20" cy="15.5" r="1.4" fill="#3a2a28"/><path d="M14.6 19.6h2.8L16 21.2z" fill="#3a2a28"/>');
   const trufa = svg('<circle cx="16" cy="13.5" r="8.5" fill="#5a3320"/><path d="M9.5 11q6.5-6 13 0M11 15q5-3.5 10 0" stroke="#8a5a3c" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M5.5 18.5h21L23 28H9z" fill="#c9973f"/><path d="M11 19l1 8.5M16 19v8.5M21 19l-1 8.5" stroke="#a87a2c" stroke-width="1.2"/>');
   const frasco = svg('<rect x="10" y="12" width="12" height="17" rx="3" fill="#d8b7a8"/><rect x="13" y="8.5" width="6" height="4" fill="#8a6a55"/><path d="M14.5 8.5V4.5h7.5v2.4h-4.4v1.6z" fill="#5a4640"/><rect x="12" y="17" width="8" height="7" rx="1.2" fill="#fff8ec"/><path d="M14 20.5h4" stroke="#a3182a" stroke-width="1.4" stroke-linecap="round"/>');
@@ -108,7 +108,7 @@
       h += `<div class="metade folha" data-i="${i}"><div class="face lado-a pautada"></div>
         <div class="face lado-b ${ultima ? 'pag-foto' : 'pautada'}">${ultima ? `<img src="${amiga.foto}" alt="Foto de ${amiga.nome}"><p>${amiga.nome}</p>` : ''}</div></div>`;
     }
-    h += `<div class="metade dura capa"><div class="face lado-a"><span>Amiga<br>Secreta</span><i>Girls Night de Natal</i></div><div class="face lado-b"></div></div>`;
+    h += `<div class="metade dura capa"><div class="face lado-a"><span>Amiga <br>Secreta</span><i>Girls Night de Natal</i></div><div class="face lado-b"></div></div>`;
     livroEl.innerHTML = h;
   }
 
