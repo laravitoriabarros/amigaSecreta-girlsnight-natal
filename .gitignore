@@ -13,3 +13,6 @@ CLAUDE.local.md
 node_modules/
 .env
 .env.*
+
+.vercel
+.env*.local
